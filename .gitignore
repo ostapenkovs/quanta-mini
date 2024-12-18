@@ -1,0 +1,10 @@
+.vscode
+
+.ipynb_notebooks
+__pycache__
+
+.DS_Store
+
+.env
+
+temp
