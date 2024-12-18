@@ -1,0 +1,13 @@
+version: "3.10"
+
+services:
+  flask_app:
+    env_file: ./.env
+
+    container_name: "${FLASK_APP}"
+    build: ./
+    ports:
+      - "${FLASK_PORT}:${FLASK_PORT}"
+    volumes:
+      - .:/app
+    restart: unless-stopped
