@@ -8,46 +8,64 @@
 </head>
 <body>
     <div class="container mt-5">
-    <form action="/" method="post" class="mx-auto" style="max-width: 600px;">
-        <div class="form-group">
-        <label for="ticker">Ticker:</label>
-        <input type="text" id="ticker" name="ticker" value="TSLA" class="form-control" required>
-        </div>
+    <!-- CONTAINER -->
 
-        <div class="form-group">
-        <label for="start_date">Start Date:</label>
-        <input type="date" id="start_date" name="start_date" value="2019-12-20" class="form-control" required>
-        </div>
-
-        <div class="form-group">
-        <label for="end_date">End Date:</label>
-        <input type="date" id="end_date" name="end_date" value="2023-12-23" class="form-control" required>
-        </div>
-
-        <div class="form-group">
-        <label for="volume_breakout_thresh">Volume Breakout Threshold (%):</label>
-        <input type="number" id="volume_breakout_thresh" name="volume_breakout_thresh" value=75 step="any" class="form-control" required>
-        </div>
-
-        <div class="form-group">
-        <label for="change_thresh">Change Threshold (%):</label>
-        <input type="number" id="change_thresh" name="change_thresh" value=5 step="any" class="form-control" required>
-        </div>
-
-        <div class="form-group">
-        <label for="holding_period">Holding Period:</label>
-        <input type="number" id="holding_period" name="holding_period" value=10 step="any" class="form-control" required>
-        </div>
-
-        <button type="submit" class="btn btn-primary w-100 mt-3">Generate Report</button>
-    </form>
-
-    {% if output %}
     <div class="mx-auto" style="max-width: 600px;">
+        <form action="/" method="post">
+            <div class="form-group">
+            <label for="ticker">Ticker:</label>
+            <input type="text" id="ticker" name="ticker" value="{{ request.form.get('ticker', '') }}" 
+                placeholder="TSLA" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+            <label for="start_date">Start Date:</label>
+            <input type="date" id="start_date" name="start_date" value="{{ request.form.get('start_date', '') }}" 
+                placeholder="2016-01-01" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+            <label for="end_date">End Date:</label>
+            <input type="date" id="end_date" name="end_date" value="{{ request.form.get('end_date', '') }}" 
+                placeholder="2022-01-01" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+            <label for="volume_breakout_thresh">Volume Breakout Threshold (%):</label>
+            <input type="number" id="volume_breakout_thresh" name="volume_breakout_thresh" value="{{ request.form.get('volume_breakout_thresh', '') }}" 
+                step="any" placeholder="200" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+            <label for="change_thresh">Change Threshold (%):</label>
+            <input type="number" id="change_thresh" name="change_thresh" value="{{ request.form.get('change_thresh', '') }}" 
+                step="any" placeholder="2" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+            <label for="holding_period">Holding Period:</label>
+            <input type="number" id="holding_period" name="holding_period" value="{{ request.form.get('holding_period', '') }}" 
+                step="any" placeholder="10" class="form-control" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 mt-3">Generate Report</button>
+        </form>
+    </div>
+
+    {% if output is not none %}
+    
+    <div class="mx-auto" style="max-width: 600px;">
+        <div class="table-responsive w-100 mt-3" style="max-height: 400px; overflow-y auto;">
+            <div class="d-flex justify-content-center">{{ output | safe }}</div>
+        </div>
+        
         <a href="{{ url_for('download') }}" class="btn btn-success w-100 mt-3">Download</a>
     </div>
+    
     {% endif %}
-    </div>    
+    
+    <!-- CONTAINER -->
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

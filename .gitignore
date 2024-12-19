@@ -7,6 +7,7 @@ __pycache__
 
 .env
 
+app/data
 app/util.py
 
 temp/*
