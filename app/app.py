@@ -2,7 +2,6 @@ import traceback
 import os, io
 from dotenv import load_dotenv
 import pandas as pd
-import wrds
 
 from flask import (
     Flask,
@@ -28,13 +27,6 @@ app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
-
-conn = None
-def get_conn():
-    global conn
-    if conn is None:
-        conn = wrds.Connection()
-    return conn
 
 @app.errorhandler(404)
 def internal_server_error(e):
@@ -64,8 +56,7 @@ def index():
             holding_period = request.form.get('holding_period')
             holding_period = int(holding_period)
 
-            c = get_conn()
-            df = get_data(conn=c, ticker=ticker, start_date=start_date, end_date=end_date)
+            df = get_data(ticker=ticker, start_date=start_date, end_date=end_date, crsp=False)
 
             ### SIGNAL ###
             df['signal'] = (
