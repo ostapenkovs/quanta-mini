@@ -1,6 +1,4 @@
-dotenv
-ipykernel
-notebook
+python-dotenv
 numpy
 pandas
 matplotlib

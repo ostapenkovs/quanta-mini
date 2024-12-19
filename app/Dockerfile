@@ -7,10 +7,7 @@ WORKDIR /app
 
 RUN apt-get -qq update && apt-get -y -qq upgrade
 
-RUN python -m pip install --upgrade pip setuptools wheel
-COPY requirements.txt ./
-RUN pip install -r requirements.txt
-
 COPY . ./
+RUN pip install -r requirements.txt
 
 ENTRYPOINT ["sh", "entrypoint.sh"]
