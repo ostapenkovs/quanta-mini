@@ -11,42 +11,40 @@
     <form action="/" method="post" class="mx-auto" style="max-width: 600px;">
         <div class="form-group">
         <label for="ticker">Ticker:</label>
-        <input type="text" id="ticker" name="ticker" value="TSLA" class="form-control" required><br>
+        <input type="text" id="ticker" name="ticker" value="TSLA" class="form-control" required>
         </div>
 
         <div class="form-group">
         <label for="start_date">Start Date:</label>
-        <input type="date" id="start_date" name="start_date" value="2019-12-20" class="form-control" required><br>
+        <input type="date" id="start_date" name="start_date" value="2019-12-20" class="form-control" required>
         </div>
 
         <div class="form-group">
         <label for="end_date">End Date:</label>
-        <input type="date" id="end_date" name="end_date" value="2023-12-23" class="form-control" required><br>
+        <input type="date" id="end_date" name="end_date" value="2023-12-23" class="form-control" required>
         </div>
 
         <div class="form-group">
         <label for="volume_breakout_thresh">Volume Breakout Threshold (%):</label>
-        <input type="number" id="volume_breakout_thresh" name="volume_breakout_thresh" value=75 class="form-control" required><br>
+        <input type="number" id="volume_breakout_thresh" name="volume_breakout_thresh" value=75 step="any" class="form-control" required>
         </div>
 
         <div class="form-group">
         <label for="change_thresh">Change Threshold (%):</label>
-        <input type="number" id="change_thresh" name="change_thresh" value=5 class="form-control" required><br>
+        <input type="number" id="change_thresh" name="change_thresh" value=5 step="any" class="form-control" required>
         </div>
 
         <div class="form-group">
         <label for="holding_period">Holding Period:</label>
-        <input type="number" id="holding_period" name="holding_period" value=10 class="form-control" required><br>
+        <input type="number" id="holding_period" name="holding_period" value=10 step="any" class="form-control" required>
         </div>
 
-        <button type="submit" class="btn btn-primary w-100">Generate Report</button>
+        <button type="submit" class="btn btn-primary w-100 mt-3">Generate Report</button>
     </form>
 
-    {% if output is not none %}
+    {% if output %}
     <div class="mx-auto" style="max-width: 600px;">
-        <div class="form-group">
         <a href="{{ url_for('download') }}" class="btn btn-success w-100 mt-3">Download</a>
-        </div>
     </div>
     {% endif %}
     </div>    
